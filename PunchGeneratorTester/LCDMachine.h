@@ -42,6 +42,7 @@ class LCDMachine
     static void TurnBacklightOn();
     static void TurnBacklightOff();
 
+    static bool backlightOn;
     static uint8_t buttonJustPressed;
     static uint8_t buttonJustReleased;
     static uint8_t buttonWas;

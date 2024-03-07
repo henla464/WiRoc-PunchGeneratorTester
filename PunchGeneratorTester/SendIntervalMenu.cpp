@@ -4,8 +4,6 @@
 
 SendIntervalMenu::SendIntervalMenu() : AbstractState()
 {
-  sendIntervalMS = 10000;
-  Settings::SetIntervalMS(sendIntervalMS);
   position = 0;
 }
 
@@ -21,7 +19,7 @@ void SendIntervalMenu::Init()
   sendIntervalMS = Settings::GetIntervalMS();
   if (sendIntervalMS > 999990)
   {
-    sendIntervalMS = 0;
+    sendIntervalMS = 10000;
     Settings::SetIntervalMS(sendIntervalMS);
   }
   printSendIntervalMS();
@@ -57,7 +55,7 @@ AbstractState* SendIntervalMenu::Tick()
 {
    if (millis()-millisAtInit > 10000)
    {
-      return (AbstractState*)&LCDStates::TheMainMenu;
+      return (AbstractState*)&LCDStates::TheSenderMenu;
    }
    return NULL;
 }

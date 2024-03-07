@@ -4,6 +4,7 @@ AbstractState* LCDMachine::CurrentMenu;
 
 uint8_t LCDMachine::BacklightPin;
 uint8_t LCDMachine::ButtonPin;
+bool LCDMachine::backlightOn = true;
 uint8_t LCDMachine::buttonJustPressed = false;
 uint8_t LCDMachine::buttonJustReleased = false;
 uint8_t LCDMachine::buttonWas = BUTTON_NONE;
@@ -15,6 +16,7 @@ void LCDMachine::Init(uint8_t buttonPin, uint8_t backlightPin)
 {
    ButtonPin = buttonPin;
    BacklightPin = backlightPin;
+   backlightOn = true;
    
     //button adc input
    pinMode( ButtonPin, INPUT );         //ensure A0 is an input
@@ -24,7 +26,7 @@ void LCDMachine::Init(uint8_t buttonPin, uint8_t backlightPin)
    TurnBacklightOn();
   
    AbstractState::lcd.begin(16,2);
-   CurrentMenu = (AbstractState*)&LCDStates::TheMainMenu;
+   CurrentMenu = (AbstractState*)&LCDStates::TheSenderMenu;
    CurrentMenu->Init();
 }
 
@@ -74,11 +76,11 @@ void LCDMachine::Tick()
   }
   millisLastTick = millis();
 
-  if (CurrentMenu == (AbstractState*)&LCDStates::TheMainMenu)
+  if (CurrentMenu == (AbstractState*)&LCDStates::TheSenderMenu)
   {
-    if (millis() - millisLastButtonPress > 20000)
+    if (millis() - millisLastButtonPress > 20000 && !backlightOn)
     {
-      Serial.println("backlight off");
+      backlightOn = false;
       TurnBacklightOff();
     }
   }
@@ -99,6 +101,7 @@ void LCDMachine::Tick()
      if (buttonReleased != BUTTON_NONE)
      {
         millisLastButtonPress = millis();
+        backlightOn = true;
         TurnBacklightOn();
      }
      switch( buttonReleased )
@@ -159,7 +162,7 @@ uint8_t LCDMachine::ReadButtons()
    
    //read the button ADC pin voltage
    buttonVoltage = analogRead( ButtonPin );
-
+    //Serial.println(buttonVoltage);
    //sense if the voltage falls within valid voltage windows
    if( buttonVoltage < ( RIGHT_10BIT_ADC + BUTTONHYSTERESIS ) )
    {

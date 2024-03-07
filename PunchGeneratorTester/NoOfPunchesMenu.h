@@ -1,24 +1,25 @@
-#ifndef __SendMenu_H__
-#define __SendMenu_H__
+#ifndef __NoOfPunchesMenu_H__
+#define __NoOfPunchesMenu_H__
 #include <Arduino.h>
 #include "AbstractState.h"
 #include <LiquidCrystal.h>
 #include "Settings.h"
 
-class SendMenu : public AbstractState 
+class NoOfPunchesMenu : public AbstractState 
 {
   public:
-    SendMenu();
+    NoOfPunchesMenu();
     virtual void Init() override;
     virtual AbstractState* Tick();
     virtual AbstractState* Select() override;
     virtual AbstractState* Up() override;
     virtual AbstractState* Down() override;
     virtual AbstractState* Left() override;
+    virtual AbstractState* Right() override;
   private:
-    uint16_t LastNoOfPunchesSent;
-    uint8_t LastRunMode;
     void printScreen();
+    uint16_t noOfPunches;
+    uint8_t position;
 };
 
-#endif // __SendMenu_H__
+#endif // __NoOfPunchesMenu_H__

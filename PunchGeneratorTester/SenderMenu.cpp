@@ -7,10 +7,13 @@ SenderMenu::SenderMenu() : AbstractState()
   firstRowIndex = 0;
 }
 
-char SenderMenu::SenderMenuItems[][15] {{"Control number"},
+char SenderMenu::SenderMenuItems[][15] {{"Send"},
+                                            {"Control number"},
                                             {"Send interval"},
                                             {"Random. inter."},
-                                            {"Send"}};
+                                            {"SI Number star"},
+                                            {"No of punches"}
+                                            };
 
 
 void SenderMenu::Init()
@@ -52,7 +55,7 @@ AbstractState* SenderMenu::Tick()
 {
    if (millis()-millisAtInit > 10000)
    {
-      return (AbstractState*)&LCDStates::TheMainMenu;
+      return (AbstractState*)&LCDStates::TheSenderMenu;
    }
    return NULL;
 }
@@ -61,16 +64,23 @@ AbstractState* SenderMenu::GetSelected()
 {
   if (cursorIndex == 0) 
   {
-    return (AbstractState*)&LCDStates::TheStationNumberMenu;
-  } else if (cursorIndex == 1)
+    return (AbstractState*)&LCDStates::TheSendMenu;
+  }
+  else if (cursorIndex == 1) 
   {
-    return (AbstractState*)&LCDStates::TheSendIntervalMenu;
+    return (AbstractState*)&LCDStates::TheStationNumberMenu;
   } else if (cursorIndex == 2)
   {
-    return (AbstractState*)&LCDStates::TheRandomizeIntervalMenu;
+    return (AbstractState*)&LCDStates::TheSendIntervalMenu;
   } else if (cursorIndex == 3)
   {
-    return (AbstractState*)&LCDStates::TheSendMenu;
+    return (AbstractState*)&LCDStates::TheRandomizeIntervalMenu;
+  } else if (cursorIndex == 4)
+  {
+    return (AbstractState*)&LCDStates::TheSINumberMenu;
+  } else if (cursorIndex == 5)
+  {
+    return (AbstractState*)&LCDStates::TheNoOfPunchesMenu;
   } 
   return NULL;
 }
@@ -85,7 +95,7 @@ AbstractState* SenderMenu::Select()
 AbstractState* SenderMenu::Down()
 {
   resetTime();
-  #define NUMBER_OF_MENUITEMS 4
+  #define NUMBER_OF_MENUITEMS 6
   
   if (cursorIndex < NUMBER_OF_MENUITEMS-1)
   {
@@ -120,7 +130,7 @@ AbstractState* SenderMenu::Up()
 AbstractState* SenderMenu::Left()
 {
   resetTime();
-  return (AbstractState*)&LCDStates::TheMainMenu;
+  return (AbstractState*)&LCDStates::TheSenderMenu;
 }
 
 AbstractState* SenderMenu::Right()

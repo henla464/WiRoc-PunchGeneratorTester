@@ -4,7 +4,6 @@
 
 StationNumberMenu::StationNumberMenu() : AbstractState()
 {
-  controlNumber = 1;
 }
 
 void StationNumberMenu::Init()
@@ -12,12 +11,12 @@ void StationNumberMenu::Init()
   AbstractState::Init();
   ClearScreen();
   lcd.setCursor(0,0);
-  lcd.print("Node number: ");
+  lcd.print("Control no: ");
    
   controlNumber = Settings::GetControlNumber();
   if (controlNumber > 999)
   {
-    controlNumber = 0;
+    controlNumber = 100;
     Settings::SetControlNumber(controlNumber);
   }
   printControlNumber();
@@ -46,7 +45,7 @@ AbstractState* StationNumberMenu::Tick()
 {
    if (millis()-millisAtInit > 10000)
    {
-      return (AbstractState*)&LCDStates::TheMainMenu;
+      return (AbstractState*)&LCDStates::TheSenderMenu;
    }
    return NULL;
 }

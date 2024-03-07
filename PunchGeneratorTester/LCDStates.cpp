@@ -7,4 +7,5 @@ StationNumberMenu LCDStates::TheStationNumberMenu;
 SendIntervalMenu LCDStates::TheSendIntervalMenu;
 RandomizeIntervalMenu LCDStates::TheRandomizeIntervalMenu;
 SendMenu LCDStates::TheSendMenu;
-
+NoOfPunchesMenu LCDStates::TheNoOfPunchesMenu;
+SINumberMenu LCDStates::TheSINumberMenu;

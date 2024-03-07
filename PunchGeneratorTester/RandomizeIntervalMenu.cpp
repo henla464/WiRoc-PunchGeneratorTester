@@ -4,7 +4,6 @@
 
 RandomizeIntervalMenu::RandomizeIntervalMenu() : AbstractState()
 {
-  randomizeMS = 100;
   Settings::SetRandomizeMS(randomizeMS);
 }
 
@@ -56,7 +55,7 @@ AbstractState* RandomizeIntervalMenu::Tick()
 {
    if (millis()-millisAtInit > 10000)
    {
-      return (AbstractState*)&LCDStates::TheMainMenu;
+      return (AbstractState*)&LCDStates::TheSenderMenu;
    }
    return NULL;
 }

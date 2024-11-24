@@ -8,6 +8,7 @@ const int d5 = 5;  // Data pin 5
 const int d6 = 6;  // Data pin 6
 const int d7 = 7;  // Data pin 7
 
+
 // Create the LiquidCrystal object
 LiquidCrystal AbstractState::lcd(rs, enable, d4, d5, d6, d7);
 

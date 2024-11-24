@@ -17,7 +17,9 @@
 #define DOWN_10BIT_ADC          307  // down
 #define LEFT_10BIT_ADC          480  // left
 #define SELECT_10BIT_ADC        720  // right
-#define BUTTONHYSTERESIS         10  // hysteresis for valid button sensing window
+#define BUTTONHYSTERESIS         20  // hysteresis for valid button sensing window
+#define BUTTONLEVELADJUSTMENT    20  // hysteresis for valid button sensing window
+
 //return values for ReadButtons()
 #define BUTTON_NONE               0  // 
 #define BUTTON_RIGHT              1  // 

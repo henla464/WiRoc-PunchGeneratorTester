@@ -162,29 +162,29 @@ uint8_t LCDMachine::ReadButtons()
    
    //read the button ADC pin voltage
    buttonVoltage = analogRead( ButtonPin );
-    //Serial.println(buttonVoltage);
+   //Serial.println(buttonVoltage);
    //sense if the voltage falls within valid voltage windows
    if( buttonVoltage < ( RIGHT_10BIT_ADC + BUTTONHYSTERESIS ) )
    {
       button = BUTTON_RIGHT;
    }
-   else if(   buttonVoltage >= ( UP_10BIT_ADC - BUTTONHYSTERESIS )
-           && buttonVoltage <= ( UP_10BIT_ADC + BUTTONHYSTERESIS ) )
+   else if(   buttonVoltage >= ( UP_10BIT_ADC + BUTTONLEVELADJUSTMENT - BUTTONHYSTERESIS )
+           && buttonVoltage <= ( UP_10BIT_ADC + BUTTONLEVELADJUSTMENT + BUTTONHYSTERESIS ) )
    {
       button = BUTTON_UP;
    }
-   else if(   buttonVoltage >= ( DOWN_10BIT_ADC - BUTTONHYSTERESIS )
-           && buttonVoltage <= ( DOWN_10BIT_ADC + BUTTONHYSTERESIS ) )
+   else if(   buttonVoltage >= ( DOWN_10BIT_ADC + BUTTONLEVELADJUSTMENT - BUTTONHYSTERESIS )
+           && buttonVoltage <= ( DOWN_10BIT_ADC + BUTTONLEVELADJUSTMENT + BUTTONHYSTERESIS ) )
    {
       button = BUTTON_DOWN;
    }
-   else if(   buttonVoltage >= ( LEFT_10BIT_ADC - BUTTONHYSTERESIS )
-           && buttonVoltage <= ( LEFT_10BIT_ADC + BUTTONHYSTERESIS ) )
+   else if(   buttonVoltage >= ( LEFT_10BIT_ADC + BUTTONLEVELADJUSTMENT - BUTTONHYSTERESIS )
+           && buttonVoltage <= ( LEFT_10BIT_ADC + BUTTONLEVELADJUSTMENT + BUTTONHYSTERESIS ) )
    {
       button = BUTTON_LEFT;
    }
-   else if(   buttonVoltage >= ( SELECT_10BIT_ADC - BUTTONHYSTERESIS )
-           && buttonVoltage <= ( SELECT_10BIT_ADC + BUTTONHYSTERESIS ) )
+   else if(   buttonVoltage >= ( SELECT_10BIT_ADC + BUTTONLEVELADJUSTMENT - BUTTONHYSTERESIS )
+           && buttonVoltage <= ( SELECT_10BIT_ADC + BUTTONLEVELADJUSTMENT + BUTTONHYSTERESIS ) )
    {
       button = BUTTON_SELECT;
    }
